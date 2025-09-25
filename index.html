@@ -101,7 +101,7 @@ h1{
 
 <h1>Estraich's Music 🎧</h1>
 
-<button id="playBtn"></button>
+<button id="playBtn" aria-label="Play/Pause"></button>
 
 <div id="trackInfo">Clique em um álbum para tocar</div>
 
@@ -140,31 +140,4 @@ h1{
    <div class="album"
         data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Jahzzar/Jahzzar_-_Happy_Rock/Jahzzar_-_Happy_Rock_-_03_-_Morning_Sunrise.mp3"
         data-title="Morning Sunrise – Jahzzar"
-        style="background-image:url('https://images.unsplash.com/photo-1495567720989-cebdbdd97913?auto=format&fit=crop&w=300&q=80')"></div>
-
-   <div class="album"
-        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Alex_Kennedy/Alex_Kennedy_Folk/Alex_Kennedy_Folk_-_04_-_Dreamy_Night.mp3"
-        data-title="Dreamy Night – Alex Kennedy"
-        style="background-image:url('https://images.unsplash.com/photo-1522199670076-2852f80289c7?auto=format&fit=crop&w=300&q=80')"></div>
-</div>
-
-<audio id="player" preload="none"></audio>
-
-<script>
-const btn      = document.getElementById('playBtn');
-const player   = document.getElementById('player');
-const albums   = document.querySelectorAll('.album');
-const infoBox = document.getElementById('trackInfo');
-
-let current = null;
-
-/* Carrega e reproduz a faixa selecionada */
-function loadTrack(el){
-    if (!el) return;
-
-    // limpa seleção anterior
-    if (current) current.classList.remove('active');
-
-    player.src = el.dataset.src;
-    player.play();
-
+        style="background-image:url('https://images.unsplash.com/photo-1495567720989-cebdbdd97913?auto=format
