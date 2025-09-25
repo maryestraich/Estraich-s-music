@@ -2,196 +2,208 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Minha Biblioteca Musical</title>
-
-<!-- Fonte -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+<title>Pop Party – 7 Faixas</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
       rel="stylesheet">
-
-<!-- Howler.js (reprodução de áudio) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"
-        integrity="sha512-+Z9rjR9eMZKk4c6K8nK3cVh6zU4QGf5FQZcH+Jj2B5bE6uGq0T1lN0dYfG1kq5OqV9z7L+6KXhW9WwuXK9gHg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <style>
 :root{
-    --bg-primary:#121212;
-    --accent:#ff9800;
-    --card-bg:#1e1e1e;
-    --text-primary:#ffffff;
+    --bg:#0a0a0a;               /* fundo preto */
+    --accent:#ff4da6;           /* rosa neon */
+    --card:#151515;
+    --text:#fff;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
-    background:var(--bg-primary);
-    color:var(--text-primary);
-    font-family:'Poppins',sans-serif;
-    padding:2rem;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Montserrat',sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:2rem 1rem;
 }
 h1{
-    text-align:center;
-    margin-bottom:2rem;
+    margin-bottom:1rem;
     font-weight:600;
+    letter-spacing:2px;
 }
-.album-grid{
-    display:flex;
-    flex-wrap:wrap;
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
     gap:1.5rem;
-    justify-content:center;
+    width:100%;
+    max-width:960px;
 }
-.album-card{
+.card{
     position:relative;
-    width:200px;
-    background:var(--card-bg);
-    border-radius:.5rem;
+    background:var(--card);
+    border-radius:12px;
     overflow:hidden;
-    text-align:center;
+    cursor:pointer;
     transition:transform .3s, box-shadow .3s;
 }
-.album-card:hover{
-    transform:scale(1.03);
-    box-shadow:0 8px 20px rgba(0,0,0,.5);
+.card:hover{
+    transform:scale(1.04);
+    box-shadow:0 8px 20px rgba(255,77,166,.4);
 }
-.album-card img{
+.card img{
     width:100%;
     display:block;
-    transition:opacity .3s;
+    filter:brightness(0) saturate(100%) invert(10%) sepia(100%) hue-rotate(300deg) brightness(1.2);
+    transition:filter .4s;
 }
-.album-card:hover img{
-    opacity:.9;               /* efeito leve ao passar o mouse */
+.card.playing img{
+    filter:brightness(0) saturate(100%) invert(10%) sepia(100%) hue-rotate(300deg) brightness(1.6);
 }
 .play-btn{
     position:absolute;
     bottom:.8rem;
     left:50%;
     transform:translateX(-50%);
-    background:rgba(0,0,0,.7);
-    color:#fff;
+    background:rgba(0,0,0,.6);
     border:none;
     border-radius:50%;
-    width:44px;height:44px;
+    width:48px;height:48px;
     font-size:1.4rem;
-    cursor:pointer;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
-.play-btn:hover{background:rgba(0,0,0,.9);}
-.track-title{
-    margin-top:.6rem;
-    padding:.4rem 0;
+.play-btn:hover{
+    background:rgba(0,0,0,.9);
+}
+.title{
+    text-align:center;
+    padding:.5rem 0;
     font-size:.95rem;
 }
 
-/* Responsividade */
-@media (max-width:600px){
-    .album-card{width:45%;}
+/* animação de pulsar quando toca */
+@keyframes pulse {
+   0%   {box-shadow:0 0 0 0 rgba(255,77,166,.4);}
+   70%  {box-shadow:0 0 0 12px rgba(255,77,166,0);}
+   100% {box-shadow:0 0 0 0 rgba(255,77,166,0);}
 }
-@media (max-width:400px){
-    .album-card{width:90%;}
+.card.playing{
+   animation:pulse 2s infinite;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Minha Biblioteca Musical</h1>
+<h1>Pop Party – 7 Faixas</h1>
 
-<div class="album-grid">
+<div class="gallery">
+   <!-- ========= CARD #1 ========= -->
+   <div class="card" data-audio="musicas/track01.mp3">
+       <img src="capas/cover01.jpg" alt="Capa da faixa 1">
+       <button class="play-btn" aria-label="Tocar">▶️</button>
+       <div class="title">Pop Hit #1</div>
+   </div>
 
-  <!-- ======= CARTÃO 1 ======= -->
-  <div class="album-card" data-audio="musicas/queen-bohemian.mp3">
-      <picture>
-          <!-- WebP como primeira opção -->
-          <source srcset="imgs/queen.webp" type="image/webp">
-          <!-- Fallback JPEG -->
-          <img src="imgs/queen.jpg"
-               alt="Queen – Bohemian Rhapsody"
-               loading="lazy">
-      </picture>
-      <button class="play-btn" aria-label="Tocar Bohemian Rhapsody">▶️</button>
-      <p class="track-title">Bohemian Rhapsody – Queen</p>
-  </div>
+   <!-- ========= CARD #2 ========= -->
+   <div class="card" data-audio="musicas/track02.mp3">
+       <img src="capas/cover02.jpg" alt="Capa da faixa 2">
+       <button class="play-btn" aria-label="Tocar">▶️</button>
+       <div class="title">Pop Hit #2</div>
+   </div>
 
-  <!-- ======= CARTÃO 2 ======= -->
-  <div class="album-card" data-audio="musicas/michael-thriller.mp3">
-      <picture>
-          <source srcset="imgs/michael.webp" type="image/webp">
-          <img src="imgs/michael.jpg"
-               alt="Michael Jackson – Thriller"
-               loading="lazy">
-      </picture>
-      <button class="play-btn" aria-label="Tocar Thriller">▶️</button>
-      <p class="track-title">Thriller – Michael Jackson</p>
-  </div>
+   <!-- ========= CARD #3 ========= -->
+   <div class="card" data-audio="musicas/track03.mp3">
+       <img src="capas/cover03.jpg" alt="Capa da faixa 3">
+       <button class="play-btn" aria-label="Tocar">▶️</button>
+       <div class="title">Pop Hit #3</div>
+   </div>
 
-  <!-- ======= CARTÃO 3 ======= -->
-  <div class="album-card" data-audio="musicas/acdc-backinblack.mp3">
-      <picture>
-          <source srcset="imgs/acdc.webp" type="image/webp">
-          <img src="imgs/acdc.jpg"
-               alt="AC/DC – Back In Black"
-               loading="lazy">
-      </picture>
-      <button class="play-btn" aria-label="Tocar Back In Black">▶️</button>
-      <p class="track-title">Back In Black – AC/DC</p>
-  </div>
+   <!-- ========= CARD #4 ========= -->
+   <div class="card" data-audio="musicas/track04.mp3">
+       <img src="capas/cover04.jpg" alt="Capa da faixa 4">
+       <button class="play-btn" aria-label="Tocar">▶️</button>
+       <div class="title">Pop Hit #4</div>
+   </div>
 
-  <!-- ======= CARTÃO 4 ======= -->
-  <div class="album-card" data-audio="musicas/adele-hello.mp3">
-      <picture>
-          <source srcset="imgs/adele.webp" type="image/webp">
-          <img src="imgs/adele.jpg"
-               alt="Adele – Hello"
-               loading="lazy">
-      </picture>
-      <button class="play-btn" aria-label="Tocar Hello">▶️</button>
-      <p class="track-title">Hello – Adele</p>
-  </div>
+   <!-- ========= CARD #5 ========= -->
+   <div class="card" data-audio="musicas/track05.mp3">
+       <img src="capas/cover05.jpg" alt="Capa da faixa 5">
+       <button class="play-btn" aria-label="Tocar">▶️</button>
+       <div class="title">Pop Hit #5</div>
+   </div>
 
-  <!-- ======= CARTÃO 5 ======= -->
-  <div class="album-card" data-audio="musicas/beyonce-halo.mp3">
-      <picture>
-          <source srcset="imgs/beyonce.webp" type="image/webp">
-          <img src="imgs/beyonce.jpg"
-               alt="Beyoncé – Halo"
-               loading="lazy">
-      </picture>
-      <button class="play-btn" aria-label="Tocar Halo">▶️</button>
-      <p class="track-title">Halo – Beyoncé</p>
-  </div>
+   <!-- ========= CARD #6 ========= -->
+   <div class="card" data-audio="musicas/track06.mp3">
+       <img src="capas/cover06.jpg" alt="Capa da faixa 6">
+       <button class="play-btn" aria-label="Tocar">▶️</button>
+       <div class="title">Pop Hit #6</div>
+   </div>
 
-  <!-- ======= CARTÃO 6 ======= -->
-  <div class= "album-card" data-audio= "musicas/eminem-loseyourself.mp3">
-      <picture>
-          <source srcset= "imgs/eminem.webp" type= "image/webp">
-          <img src= "imgs/eminem.jpg"
-               alt= "Eminem – Lose Yourself"
-               loading= "lazy">
-      </picture>
-      <button class= "play-btn" aria-label= "Tocar Lose Yourself">▶️</button>
-      <p class= "track-title">Lose Yourself – Eminem</p>
-  </div>
+   <!-- ========= CARD #7 ========= -->
+   <div class="card" data-audio="musicas/track07.mp3">
+       <img src="capas/cover07.jpg" alt="Capa da faixa 7">
+       <button class="play-btn" aria-label="Tocar">▶️</button>
+       <div class="title">Pop Hit #7</div>
+   </div>
+</div>
 
-  <!-- ======= CARTÃO 7 ======= -->
-  <div class= "album-card" data-audio= "musicas/ladygaga-pokerface.mp3">
-      <picture>
-          <source srcset= "imgs/ladygaga.webp" type= "image/webp">
-          <img src= "imgs/ladygaga.jpg"
-               alt= "Lady Gaga – Poker Face"
-               loading= "lazy">
-      </picture>
-      <button class= "play-btn" aria-label= "Tocar Poker Face">▶️</button>
-      <p class= "track-title">Poker Face – Lady Gaga</p>
-  </div>
+<script>
+// ---------- Variáveis ----------
+let currentAudio = null;      // áudio que está tocando agora
+let currentCard = null;      // card associado
 
-  <!-- ======= CARTÃO 8 ======= -->
-  <div class= "album-card" data-audio= "musicas/madonna-likeavirgin.mp3">
-      <picture>
-          <source srcset= "imgs/madonna.webp" type= "image/webp">
-          <img src= "imgs/madonna.jpg"
-               alt= "Madonna – Like a Virgin"
-               loading= "lazy">
-      </picture>
-      <button class= "play-btn" aria-label= "Tocar Like a Virgin">▶️</button>
-      <p class= "track-title">Like a Virgin – Madonna</p>
-  </div>
+// ---------- Funções ----------
+function togglePlay(card) {
+   const audioSrc = card.dataset.audio;
 
-  <!-- ======= CARTÃO 9 ======= -->
-  <div class= "album-card" data-audio= "musicas/pinkfloyd-shineonyou.mp3">
+   // Se já houver um áudio tocando...
+   if (currentAudio && currentAudio.src.endsWith(audioSrc)) {
+        // Clicou na mesma faixa → pausa
+        currentAudio.pause();
+        currentCard.classList.remove('playing');
+        currentAudio = null;
+        currentCard = null;
+        return;
+   }
+
+   // Se outra faixa estava tocando → para antes de iniciar nova
+   if (currentAudio) {
+        currentAudio.pause();
+        currentCard.classList.remove('playing');
+   }
+
+   // Cria novo objeto Audio e inicia
+   const audio = new Audio(audioSrc);
+   audio.play();
+   card.classList.add('playing');
+
+   // Quando terminar, limpa o estado
+   audio.addEventListener('ended', () => {
+        card.classList.remove('playing');
+        currentAudio = null;
+        currentCard = null;
+   });
+
+   // Atualiza referências globais
+   currentAudio = audio;
+   currentCard = card;
+}
+
+// ---------- Eventos ----------
+document.querySelectorAll('.card').forEach(card => {
+   const btn = card.querySelector('.play-btn');
+
+   // Clique no botão ou em qualquer parte do card
+   btn.addEventListener('click', e => {
+        e.stopPropagation();          // evita duplo disparo
+        togglePlay(card);
+   });
+   
+   // Também permite tocar ao clicar na capa
+   card.addEventListener('click', () => togglePlay(card));
+});
+</script>
+
+</body>
+</html>
