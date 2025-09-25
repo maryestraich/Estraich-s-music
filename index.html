@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Estraich's Pop</title>
+<title>Estraich’s Music</title>
 <style>
   body{
     font-family:Arial,Helvetica,sans-serif;
@@ -29,7 +29,6 @@
     transition:background .3s;
   }
   #playBtn:hover{background:#e73373;}
-  /* Ícone dentro do botão */
   #playBtn::before{
     content:'▶';
     font-size:2rem;
@@ -81,87 +80,57 @@
     50%{border-color:#fff;}
     100%{border-color:#ff4081;}
   }
-
 </style>
 </head>
 <body>
 
-<h1>Músicas Etraich's🎧</h1>
+<h1>Estraich’s Music 🎧</h1>
 
 <button id="playBtn"></button>
 
 <div class="gallery" id="gallery">
-  <!-- Cada div tem data-src (arquivo mp3) e data-title (nome da faixa) -->
-  <div class="album" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-       data-title="Pop Hit #1"
-       style="background-image:url('https://picsum.photos/id/1011/200/200')"></div>
+   <!-- Faixa original + +7 extras = 11 faixas -->
+   <div class="album" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        data-title="Dreams in the City"
+        style="background-image:url('https://picsum.photos/id/1011/200/200')"></div>
 
-  <div class="album" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-       data-title="Pop Hit #2"
-       style="background-image:url('https://picsum.photos/id/1025/200/200')"></div>
+   <div class="album" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+        data-title="Midnight Ride"
+        style="background-image:url('https://picsum.photos/id/1025/200/200')"></div>
 
-  <div class="album" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
-       data-title="Pop Hit #3"
-       style="background-image:url('https://picsum.photos/id/1035/200/200')"></div>
+   <div class="album" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+        data-title="Sunset Boulevard"
+        style="background-image:url('https://picsum.photos/id/1035/200/200')"></div>
 
-  <div class="album" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
-       data-title="Pop Hit #4"
-       style="background-image:url('https://picsum.photos/id/1042/200/200')"></div>
-</div>
+   <div class="album" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+        data-title="Neon Love"
+        style="background-image:url('https://picsum.photos/id/1042/200/200')"></div>
 
-<!-- Elemento de áudio invisível -->
-<audio id="player"></audio>
+   <!-- Extras -->
+   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Lil_Stallion_-_Free_Music_Academy/Lil_Stallion_-_Free_Music_Academy_-_01_-_Feel_Good.mp3"
+        data-title="Feel Good"
+        style="background-image:url('https://picsum.photos/id/1050/200/200')"></div>
 
-<script>
-const btn = document.getElementById('playBtn');
-const player = document.getElementById('player');
-const albums = document.querySelectorAll('.album');
-let currentAlbum = null;
+   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Happy%20Rock/Kevin_MacLeod_-_Happy_Rock_-_01_-_Bossa_Nova_Intro.mp3"
+        data-title="Bossa Nova Intro"
+        style="background-image:url('https://picsum.photos/id/1062/200/200')"></div>
 
-// Função para mudar a faixa
-function loadTrack(album){
-  if(!album) return;
+   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Epidemic_Soundtrack/Epidemic_Soundtrack_-_04_-_Candlelight%20Dreams.mp3"
+        data-title="Candlelight Dreams"
+        style="background-image:url('https://picsum.photos/id/1074/200/200')"></div>
 
-  // Remove marcação da anterior
-  if(currentAlbum) currentAlbum.classList.remove('active');
+   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Jahzzar/Jahzzar_-_Happy%20Rock/Jahzzar_-_Happy_Rock_-_03_-_Sunrise%20Morning.mp3"
+        data-title="Sunrise Morning"
+        style="background-image:url('https://picsum.photos/id/1086/200/200')"></div>
 
-  const src = album.dataset.src;
-  const title = album.dataset.title;
+   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Elevator_Music/Kevin_MacLeod_-_Elevator_Music_-_01_-_The_Big_Slide.mp3"
+        data-title="The Big Slide"
+        style="background-image:url('https://picsum.photos/id/1098/200/200')"></div>
 
-  player.src = src;               // carrega MP3
-  player.play();                 // inicia reprodução
-  btn.classList.add('playing');   // anima botão
-  album.classList.add('active'); // marca capa atual
-  currentAlbum = album;
+   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Alex_Kennedy/Alex_Kennedy_Folk/Alex_Kennedy_Folk_-_04_-_Mellow_Breeze.mp3"
+        data-title="Mellow Breeze"
+        style="background-image:url('https://picsum.photos/id/1109/200/200')"></div>
 
-  // opcional – exibir título no console ou na página
-  console.log(`Tocando → ${title}`);
-}
-
-// Clique nas capas
-albums.forEach(a => {
-  a.addEventListener('click', () => loadTrack(a));
-});
-
-// Botão play/pause
-btn.addEventListener('click', () => {
-  if(player.paused){
-    player.play();
-    btn.classList.add('playing');
-   if(currentAlbum) currentAlbum.classList.add('active');
-  }else{
-    player.pause();
-    btn.classList.remove('playing');
-   if(currentAlbum) currentAlbum.classList.remove('active');
-  }
-});
-
-// Quando a música acabar, remover animações
-player.addEventListener('ended', () => {
-   btn.classList.remove('playing');
-   if(currentAlbum) currentAlbum.classList.remove('active');
-});
-</script>
-
-</body>
-</html>
+   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Twist%20and%20Pulse/Kevin_MacLeod_-_Twist_and_Pulse_-_02_-_Summer_Tide.mp3"
+        data-title="Summer Tide"
+        style="background-image:url('https://picsum
