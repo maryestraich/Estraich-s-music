@@ -1,353 +1,155 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Estraich’s Music 🎧</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: #000;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      color: #fff;
-    }
-    h1 {
-      margin-bottom: 20px;
-      color: #e91e63;
-    }
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      width: 100%;
-      max-width: 900px;
-    }
-    .album {
-      width: 160px;
-      background: #111;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      transition: transform .2s, box-shadow .3s;
-    }
-    .album:hover {
-      transform: scale(1.03);
-      box-shadow: 0 4px 12px rgba(255,255,255,0.2);
-    }
-    .album.active {
-      border: 2px solid #e91e63;
-    }
-    .album .cover {
-      width: 100%;
-      height: 160px;
-      background-size: cover;
-      background-position: center;
-    }
-    .album .info {
-      padding: 10px;
-      text-align: center;
-    }
-    .album .info .title {
-      font-size: 1rem;
-      margin-bottom: 10px;
-      color: #fff;
-    }
-    .album .controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .album .controls button {
-      border: none;
-      background: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #e91e63;
-    }
-    .album .controls button:disabled {
-      color: #555;
-      cursor: default;
-    }
-    .album .time {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 10px 10px;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-    .progress-bar {
-      width: 100%;
-      height: 6px;
-      background: #333;
-      cursor: pointer;
-    }
-    .progress {
-      height: 100%;
-      background: #e91e63;
-      width: 0%;
-    }
-    @media(max-width: 500px) {
-      .album {
-        width: 140px;
-      }
-      .album .cover {
-        height: 140px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Estraich’s Music 🎧</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:Arial,sans-serif;
+    background:#111;color:#fff;
+    padding:20px;
+  }
+  h1{text-align:center;margin-bottom:30px}
+  .gallery{
+    display:flex;flex-wrap:wrap;
+    gap:20px;justify-content:center;
+  }
+  .album{
+    width:180px;background:#222;
+    border-radius:8px;overflow:hidden;
+    transition:transform .2s;
+  }
+  .album.active{transform:scale(1.05)}
+  .cover{
+    width:100%;height:180px;
+    overflow:hidden;position:relative;
+  }
+  .cover img{
+    width:100%;height:100%;
+    object-fit:cover;display:block;
+  }
+  .info{
+    padding:10px;
+    font-size:.9rem;color:#aaa;
+  }
+  .title{margin-bottom:8px;font-weight:bold;color:#fff}
+  .controls button{
+    background:none;border:none;color:#e91e63;
+    font-size:1.2rem;cursor:pointer;margin-right:5px;
+  }
+  .controls button[disabled]{opacity:.4;cursor:default}
+  .progress-bar{
+    width:100%;height:6px;background:#333;cursor:pointer;margin-top:8px;
+  }
+  .progress{height:100%;background:#e91e63;width:0%}
+  .time{display:flex;justify-content:space-between;font-size:.8rem;margin-top:4px}
+  @media(max-width:500px){
+    .album{width:140px}
+    .cover{height:140px}
+  }
+</style>
 </head>
 <body>
 
-  <h1>Estraich’s Music 🎧</h1>
+<h1>Estraich’s Music 🎧</h1>
 
-  <div class="gallery" id="gallery">
-    <!-- Álbuns / músicas -->
-    <div class="album"
-         data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_01_-_Summer_Breeze.mp3"
-         data-title="Summer Breeze (Scott Buckley)"
-         style="--cover:url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=300&q=80')">
-      <div class="cover" style="background-image: var(--cover);"></div>
-      <div class="info">
-        <div class="title">Summer Breeze</div>
-        <div class="controls">
-          <button class="play">▶</button>
-          <button class="pause" disabled>❚❚</button>
-        </div>
-        <div class="progress-bar"><div class="progress"></div></div>
-        <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
-      </div>
+<div class="gallery" id="gallery">
+
+  <!-- Álbuns / músicas -->
+  <div class="album"
+       data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_01_-_Summer_Breeze.mp3"
+       data-title="Summer Breeze (Scott Buckley)">
+    <div class="cover">
+      <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=300&q=80"
+           alt="Capa Summer Breeze">
     </div>
-
-    <div class="album"
-         data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_02_-_Night_Drive.mp3"
-         data-title="Night Drive (Scott Buckley)"
-         style="--cover:url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=300&q=80')">
-      <div class="cover" style="background-image: var(--cover);"></div>
-      <div class="info">
-        <div class="title">Night Drive</div>
-        <div class="controls">
-          <button class="play">▶</button>
-          <button class="pause" disabled>❚❚</button>
-        </div>
-        <div class="progress-bar"><div class="progress"></div></div>
-        <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
+    <div class="info">
+      <div class="title">Summer Breeze</div>
+      <div class="controls">
+        <button class="play">▶</button>
+        <button class="pause" disabled>❚❚</button>
       </div>
+      <div class="progress-bar"><div class="progress"></div></div>
+      <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
     </div>
-
-    <div class="album"
-         data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Jahzzar/Jahzzar_-_Happy_Rock/Jahzzar_-_Happy_Rock_-_01_-_Feel_Good.mp3"
-         data-title="Feel Good (Jahzzar)"
-         style="--cover:url('https://images.unsplash.com/photo-1608889174113-8c07a83f870c?auto=format&fit=crop&w=300&q=80')">
-      <div class="cover" style="background-image: var(--cover);"></div>
-      <div class="info">
-        <div class="title">Feel Good</div>
-        <div class="controls">
-          <button class="play">▶</button>
-          <button class="pause" disabled>❚❚</button>
-        </div>
-        <div class="progress-bar"><div class="progress"></div></div>
-        <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
-      </div>
-    </div>
-
-    <!-- Três músicas adicionais livres de direitos autorais (exemplos hipotéticos) -->
-    <div class="album"
-         data-src="https://archive.org/download/royaltyfree-music-01/07%20-%20Royalty_Free_01.mp3"
-         data-title="Royalty Free 01"
-         style="--cover:url('https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=300&q=80')">
-      <div class="cover" style="background-image: var(--cover);"></div>
-      <div class="info">
-        <div class="title">Royalty Free 01</div>
-        <div class="controls">
-          <button class="play">▶</button>
-          <button class="pause" disabled>❚❚</button>
-        </div>
-        <div class="progress-bar"><div class="progress"></div></div>
-        <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
-      </div>
-    </div>
-
-    <div class="album"
-         data-src="https://archive.org/download/royaltyfree-music-02/08%20-%20Royalty_Free_02.mp3"
-         data-title="Royalty Free 02"
-         style="--cover:url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=300&q=80')">
-      <div class="cover" style="background-image: var(--cover);"></div>
-      <div class="info">
-        <div class="title">Royalty Free 02</div>
-        <div class="controls">
-          <button class="play">▶</button>
-          <button class="pause" disabled>❚❚</button>
-        </div>
-        <div class="progress-bar"><div class="progress"></div></div>
-        <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
-      </div>
-    </div>
-
-    <div class="album"
-         data-src="https://archive.org/download/royaltyfree-music-03/09%20-%20Royalty_Free_03.mp3"
-         data-title="Royalty Free 03"
-         style="--cover:url('https://images.unsplash.com/photo-1525186402429-0d81d3202922?auto=format&fit=crop&w=300&q=80')">
-      <div class="cover" style="background-image: var(--cover);"></div>
-      <div class="info">
-        <div class="title">Royalty Free 03</div>
-        <div class="controls">
-          <button class="play">▶</button>
-          <button class="pause" disabled>❚❚</button>
-        </div>
-        <div class="progress-bar"><div class="progress"></div></div>
-        <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
-      </div>
-    </div>
-
-    <div class="album"
-         data-src="https://archive.org/download/royaltyfree-music-04/10%20-%20Royalty_Free_04.mp3"
-         data-title="Royalty Free 04"
-         style="--cover:url('https://images.unsplash.com/photo-1534070183047-7e0f5ede98b6?auto=format&fit=crop&w=300&q=80')">
-      <div class="cover" style="background-image: var(--cover);"></div>
-      <div class="info">
-        <div class="title">Royalty Free 04</div>
-        <div class="controls">
-          <button class="play">▶</button>
-          <button class="pause" disabled>❚❚</button>
-        </div>
-        <div class="progress-bar"><div class="progress"></div></div>
-        <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
-      </div>
-    </div>
-
-    <div class="album"
-         data-src="https://archive.org/download/royaltyfree-music-05/11%20-%20Royalty_Free_05.mp3"
-         data-title="Royalty Free 05"
-         style="--cover:url('https://images.unsplash.com/photo-1514679722016-3a0cb8cc4de7?auto=format&fit=crop&w=300&q=80')">
-      <div class="cover" style="background-image: var(--cover);"></div>
-      <div class="info">
-        <div class="title">Royalty Free 05</div>
-        <div class="controls">
-          <button class="play">▶</button>
-          <button class="pause" disabled>❚❚</button>
-        </div>
-        <div class="progress-bar"><div class="progress"></div></div>
-        <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
-      </div>
-    </div>
-
-    <div class="album"
-         data-src="https://archive.org/download/royaltyfree-music-06/12%20-%20Royalty_Free_06.mp3"
-         data-title="Royalty Free 06"
-         style="--cover:url('https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=300&q=80')">
-      <div class="cover" style="background-image: var(--cover);"></div>
-      <div class="info">
-        <div class="title">Royalty Free 06</div>
-        <div class="controls">
-          <button class="play">▶</button>
-          <button class="pause" disabled>❚❚</button>
-        </div>
-        <div class="progress-bar"><div class="progress"></div></div>
-        <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
-      </div>
-    </div>
-
   </div>
 
-  <audio id="player" preload="none"></audio>
+  <div class="album"
+       data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_02_-_Night_Drive.mp3"
+       data-title="Night Drive (Scott Buckley)">
+    <div class="cover">
+      <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=300&q=80"
+           alt="Capa Night Drive">
+    </div>
+    <div class="info">
+      <div class="title">Night Drive</div>
+      <div class="controls">
+        <button class="play">▶</button>
+        <button class="pause" disabled>❚❚</button>
+      </div>
+      <div class="progress-bar"><div class="progress"></div></div>
+      <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
+    </div>
+  </div>
 
-  <script>
-    const gallery = document.getElementById('gallery');
-    const player = document.getElementById('player');
-    let currentAlbumEl = null;
+  <div class="album"
+       data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Jahzzar/Jahzzar_-_Happy_Rock/Jahzzar_-_Happy_Rock_-_01_-_Feel_Good.mp3"
+       data-title="Feel Good (Jahzzar)">
+    <div class="cover">
+      <img src="https://images.unsplash.com/photo-1608889174113-8c07a83f870c?auto=format&fit=crop&w=300&q=80"
+           alt="Capa Feel Good">
+    </div>
+    <div class="info">
+      <div class="title">Feel Good</div>
+      <div class="controls">
+        <button class="play">▶</button>
+        <button class="pause" disabled>❚❚</button>
+      </div>
+      <div class="progress-bar"><div class="progress"></div></div>
+      <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
+    </div>
+  </div>
 
-    gallery.addEventListener('click', (e) => {
-      let albumEl = e.target.closest('.album');
-      if (!albumEl) return;
-      if (albumEl === currentAlbumEl) return;
+  <!-- Três músicas adicionais livres de direitos autorais (exemplos hipotéticos) -->
+  <div class="album"
+       data-src="https://archive.org/download/royaltyfree-music-01/07%20-%20Royalty_Free_01.mp3"
+       data-title="Royalty Free 01">
+    <div class="cover">
+      <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=300&q=80"
+           alt="Capa Royalty Free 01">
+    </div>
+    <div class="info">
+      <div class="title">Royalty Free 01</div>
+      <div class="controls">
+        <button class="play">▶</button>
+        <button class="pause" disabled>❚❚</button>
+      </div>
+      <div class="progress-bar"><div class="progress"></div></div>
+      <div class="time"><span class=\"current\">0:00</span><span class=\"duration\">0:00</span></div>
+    </div>
+  </diV>
 
-      if (currentAlbumEl) resetAlbum(currentAlbumEl);
+  <diV class=\"album\"
+       data-src=\"https://archive.org/download/royaltyfree-music-02/08%20-%20Royalty_Free_02.mp3\"
+       data-title=\"Royalty Free 02\">
+    <diV class=\"cover\">
+      <img src=\"https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=300&q=80\"
+           alt=\"Capa Royalty Free 02\">
+    </diV>
+    <diV class=\"info\">
+      <diV class=\"title\">Royalty Free 02</diV>
+      <diV class=\"controls\">
+        <button class=\"play\">▶</button>
+        <button class=\"pause\" disabled>❚❚</button>
+      </diV>
+      <diV class=\"progress-bar\"><diV class=\"progress\"></diV></diV>
+      <diV class=\"time\"><span class=\"current\">0:00</span><span class=\"duration\">0:00</span></diV>
+    </diV>
+  </diV>
 
-      currentAlbumEl = albumEl;
-      albumEl.classList.add('active');
-
-      player.src = albumEl.dataset.src;
-      player.play();
-
-      const btnPlay = albumEl.querySelector('.play');
-      const btnPause = albumEl.querySelector('.pause');
-      btnPlay.disabled = true;
-      btnPause.disabled = false;
-
-      const currentSpan = albumEl.querySelector('.current');
-      const durationSpan = albumEl.querySelector('.duration');
-      const progressEl = albumEl.querySelector('.progress');
-
-      // carregar duração
-      player.addEventListener('loadedmetadata', () => {
-        durationSpan.textContent = formatTime(player.duration);
-      });
-
-      // atualizar tempo / barra
-      player.addEventListener('timeupdate', () => {
-        const c = player.currentTime;
-        const d = player.duration;
-        if (!isNaN(d) && d > 0) {
-          progressEl.style.width = (c / d) * 100 + '%';
-        }
-        currentSpan.textContent = formatTime(c);
-      });
-
-      btnPause.onclick = () => {
-        player.pause();
-        btnPause.disabled = true;
-        btnPlay.disabled = false;
-      };
-      btnPlay.onclick = () => {
-        player.play();
-        btnPlay.disabled = true;
-        btnPause.disabled = false;
-      };
-
-      player.onended = () => {
-        resetAlbum(albumEl);
-      };
-    });
-
-    function resetAlbum(albumEl) {
-      albumEl.classList.remove('active');
-      const btnPlay = albumEl.querySelector('.play');
-      const btnPause = albumEl.querySelector('.pause');
-      const progressEl = albumEl.querySelector('.progress');
-      const currentSpan = albumEl.querySelector('.current');
-      const durationSpan = albumEl.querySelector('.duration');
-
-      btnPlay.disabled = false;
-      btnPause.disabled = true;
-      progressEl.style.width = '0%';
-      currentSpan.textContent = '0:00';
-      durationSpan.textContent = '0:00';
-
-      if (albumEl === currentAlbumEl) {
-        player.pause();
-        player.currentTime = 0;
-        currentAlbumEl = null;
-      }
-    }
-
-    function formatTime(sec) {
-      const m = Math.floor(sec / 60) || 0;
-      const s = Math.floor(sec % 60) || 0;
-      return `${m}:${s < 10 ? '0' + s : s}`;
-    }
-  </script>
-</body>
-</html>
+  <diV class=\"album\"
+       data-src=\"https://archive.org/download/royaltyfree-music-03/09%20-%20Royalty_Free_03.mp3\"
+       data-title=\"Royalty Free 03\">
+    <diV class=\"cover\">
+      <img src=\"https://images.unsplash
