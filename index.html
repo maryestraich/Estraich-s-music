@@ -2,135 +2,191 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Estraich’s Music</title>
+<title>Estraich&#39;s Music</title>
 <style>
-  body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#111;
-    color:#eee;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    min-height:100vh;
-    margin:0;
-  }
-  h1{margin-bottom:1rem;}
-  /* Botão */
-  #playBtn{
-    width:80px;height:80px;
-    border:none;
-    border-radius:50%;
-    background:#ff4081;
-    cursor:pointer;
-    position:relative;
-    outline:none;
-    box-shadow:0 4px 12px rgba(0,0,0,.5);
-    transition:background .3s;
-  }
-  #playBtn:hover{background:#e73373;}
-  #playBtn::before{
-    content:'▶';
-    font-size:2rem;
-    color:#fff;
-    position:absolute;
-    left:50%;top:50%;
-    transform:translate(-50%,-50%);
-  }
-  #playBtn.playing{
-    animation:spin 2s linear infinite;
-  }
-  #playBtn.playing::before{content:'❚❚';}
-  @keyframes spin{
-    from{transform:rotate(0deg);}
-    to{transform:rotate(360deg);}
-  }
+/* ----------- Layout geral ----------- */
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  background:#111;
+  color:#eee;
+  font-family:Arial,Helvetica,sans-serif;
+}
+h1{
+  margin:1.5rem 0 0.5rem;
+  font-size:2rem;
+  letter-spacing:2px;
+}
 
-  /* Galeria de álbuns */
-  .gallery{
-    display:flex;
-    gap:1rem;
-    margin-top:2rem;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  .album{
-    width:120px;height:120px;
-    background-size:cover;
-    background-position:center;
-    border-radius:8px;
-    cursor:pointer;
-    position:relative;
-    box-shadow:0 2px 8px rgba(0,0,0,.4);
-    transition:transform .3s, box-shadow .3s;
-  }
-  .album:hover{
-    transform:scale(1.07);
-    box-shadow:0 4px 12px rgba(255,64,129,.6);
-  }
-  .album.active::after{
-    content:'';
-    position:absolute; inset:0;
-    border:4px solid #ff4081;
-    border-radius:8px;
-    animation:pulse 1.5s infinite;
-  }
-  @keyframes pulse{
-    0%{border-color:#ff4081;}
-    50%{border-color:#fff;}
-    100%{border-color:#ff4081;}
-  }
+/* ----------- Botão play/pause ----------- */
+#playBtn{
+  width:90px; height:90px;
+  border:none; border-radius:50%;
+  background:#ff4081;               /* rosa */
+  cursor:pointer;
+  position:relative;
+  box-shadow:0 4px 12px rgba(0,0,0,.6);
+  transition:background .3s, transform .2s;
+}
+#playBtn:hover{
+  background:#e73373;
+  transform:scale(1.07);
+}
+#playBtn::before{
+  content:'▶';
+  font-size:2.2rem; color:#fff;
+  position:absolute; left:50%; top:50%;
+  transform:translate(-50%,-50%);
+}
+#playBtn.playing{
+  animation:spin 2s linear infinite;
+}
+#playBtn.playing::before{content:'❚❚';}
+
+/* rotação do botão */
+@keyframes spin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+/* ----------- Galeria de álbuns ----------- */
+.gallery{
+  display:flex; flex-wrap:wrap; gap:1rem;
+  justify-content:center; margin-top:2rem;
+}
+.album{
+  width:130px; height:130px;
+  background-size:cover; background-position:center;
+  border-radius:12px;
+  cursor:pointer;
+  position:relative;
+  box-shadow:0 2px 8px rgba(0,0,0,.4);
+}
+
+/* brilho pulsante */
+.album::after{
+  content:'';
+  position:absolute; inset:0;
+  border-radius:12px;
+  background:
+    linear-gradient(135deg,
+      rgba(255,255,255,.0)   0%,
+      rgba(255,255,255,.4)   50%,
+      rgba(255,255,255,.0)   100%);
+  opacity:0;
+  transition:opacity .3s;
+}
+.album:hover::after{opacity:.6;}
+
+/* destaque da faixa tocando */
+.album.active{
+  box-shadow:0 0 20px #ff4081;
+}
+.album.active::after{opacity:.9;}
+
+/* ----------- Texto da faixa ----------- */
+#trackInfo{
+  margin-top:.8rem;
+  font-size:.95rem;
+}
+
+/* ----------- Responsividade ----------- */
+@media(max-width:500px){
+   .album{width:100px;height:100px;}
+   #playBtn{width:70px;height:70px;}
+}
 </style>
 </head>
+
 <body>
 
-<h1>Estraich’s Music 🎧</h1>
+<h1>Estraich&#39;s Music 🎧</h1>
 
 <button id="playBtn"></button>
 
+<div id="trackInfo">Clique em uma capa para tocar</div>
+
 <div class="gallery" id="gallery">
-   <!-- Faixa original + +7 extras = 11 faixas -->
-   <div class="album" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-        data-title="Dreams in the City"
-        style="background-image:url('https://picsum.photos/id/1011/200/200')"></div>
+   <!-- Cada .album tem data-src (mp3) e data-title (nome da faixa) -->
+   <div class="album"
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Michael_Jackson_-_Free_Music_Academy/Michael_Jackson_-_Free_Music_Academy_-_01_-_Billie_Jean.mp3"
+        data-title="Billie Jean – Michael Jackson"
+        style="background-image:url('https://picsum.photos/id/1011/300/300')"></div>
 
-   <div class="album" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-        data-title="Midnight Ride"
-        style="background-image:url('https://picsum.photos/id/1025/200/200')"></div>
+   <div class="album"
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Michael_Jackson_-_Free_Music_Academy/Michael_Jackson_-_Free_Music_Academy_-_02_-_Thriller.mp3"
+        data-title="Thriller – Michael Jackson"
+        style="background-image:url('https://picsum.photos/id/1025/300/300')"></div>
 
-   <div class="album" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
-        data-title="Sunset Boulevard"
-        style="background-image:url('https://picsum.photos/id/1035/200/200')"></div>
+   <div class="album"
+        data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        data-title="Love Story – Pop Cover"
+        style="background-image:url('https://picsum.photos/id/1035/300/300')"></div>
 
-   <div class="album" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
-        data-title="Neon Love"
-        style="background-image:url('https://picsum.photos/id/1042/200/200')"></div>
+   <div class="album"
+        data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+        data-title="Shape of You – Pop Remix"
+        style="background-image:url('https://picsum.photos/id/1042/300/300')"></div>
 
-   <!-- Extras -->
-   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Lil_Stallion_-_Free_Music_Academy/Lil_Stallion_-_Free_Music_Academy_-_01_-_Feel_Good.mp3"
-        data-title="Feel Good"
-        style="background-image:url('https://picsum.photos/id/1050/200/200')"></div>
+   <div class="album"
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Happy_Rock/Kevin_MacLeod_-_Happy_Rock_-_01_-_Sunny_Day.mp3"
+        data-title="Sunny Day – Kevin MacLeod"
+        style="background-image:url('https://picsum.photos/id/1050/300/300')"></div>
 
-   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Happy%20Rock/Kevin_MacLeod_-_Happy_Rock_-_01_-_Bossa_Nova_Intro.mp3"
-        data-title="Bossa Nova Intro"
-        style="background-image:url('https://picsum.photos/id/1062/200/200')"></div>
+   <div class="album"
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Lloyd_Burden/Lloyd_Burden_-_The_Electric_Forest_-_04_-_You%20Are%20My%20Sunshine.mp3"
+        data-title="You Are My Sunshine – Lloyd Burden"
+        style="background-image:url('https://picsum.photos/id/1062/300/300')"></div>
 
-   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Epidemic_Soundtrack/Epidemic_Soundtrack_-_04_-_Candlelight%20Dreams.mp3"
-        data-title="Candlelight Dreams"
-        style="background-image:url('https://picsum.photos/id/1074/200/200')"></div>
+   <div class="album"
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Jahzzar/Jahzzar_-_Happy_Rock/Jahzzar_-_Happy_Rock_-_03_-_Morning_Sunrise.mp3"
+        data-title="Morning Sunrise – Jahzzar"
+        style="background-image:url('https://picsum.photos/id/1074/300/300')"></div>
 
-   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Jahzzar/Jahzzar_-_Happy%20Rock/Jahzzar_-_Happy_Rock_-_03_-_Sunrise%20Morning.mp3"
-        data-title="Sunrise Morning"
-        style="background-image:url('https://picsum.photos/id/1086/200/200')"></div>
+   <div class="album"
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Alex_Kennedy/Alex_Kennedy_Folk/Alex_Kennedy_Folk_-_04_-_Dreamy_Night.mp3"
+        data-title="Dreamy Night – Alex Kennedy"
+        style="background-image:url('https://picsum.photos/id/1086/300/300')"></div>
+</div>
 
-   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Elevator_Music/Kevin_MacLeod_-_Elevator_Music_-_01_-_The_Big_Slide.mp3"
-        data-title="The Big Slide"
-        style="background-image:url('https://picsum.photos/id/1098/200/200')"></div>
+<!-- Audio invisível -->
+<audio id="player"></audio>
 
-   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Alex_Kennedy/Alex_Kennedy_Folk/Alex_Kennedy_Folk_-_04_-_Mellow_Breeze.mp3"
-        data-title="Mellow Breeze"
-        style="background-image:url('https://picsum.photos/id/1109/200/200')"></div>
+<script>
+const btn      = document.getElementById('playBtn');
+const player   = document.getElementById('player');
+const albums   = document.querySelectorAll('.album');
+const infoBox = document.getElementById('trackInfo');
 
-   <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Twist%20and%20Pulse/Kevin_MacLeod_-_Twist_and_Pulse_-_02_-_Summer_Tide.mp3"
-        data-title="Summer Tide"
-        style="background-image:url('https://picsum
+let currentAlbum = null;
+
+/* Carrega e toca a faixa selecionada */
+function loadTrack(album){
+    if(!album) return;
+
+    // limpa seleção anterior
+    if(currentAlbum) currentAlbum.classList.remove('active');
+
+    const src   = album.dataset.src;
+    const title = album.dataset.title;
+
+    player.src = src;
+    player.play();
+
+    btn.classList.add('playing');
+    album.classList.add('active');
+    currentAlbum = album;
+
+    infoBox.textContent = `Tocando → ${title}`;
+}
+
+/* Clique nas capas */
+albums.forEach(a => a.addEventListener('click', () => loadTrack(a)));
+
+/* Botão play / pause */
+btn.addEventListener('click', () => {
+    if(player.paused){
