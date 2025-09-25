@@ -11,21 +11,21 @@ body{
     display:flex;
     flex-direction:column;
     align-items:center;
-    background:#fff;               /* fundo branco */
+    background:#fff;
     color:#222;
     font-family:Arial,Helvetica,sans-serif;
 }
 h1{
     margin:1.5rem 0 .5rem;
     font-size:2rem;
-    color:#e91e63;                 /* rosa forte */
+    color:#e91e63;
 }
 
 /* ==================== Botão Play/Pause ==================== */
 #playBtn{
     width:80px; height:80px;
     border:none; border-radius:50%;
-    background:#e91e63;           /* rosa */
+    background:#e91e63;
     cursor:pointer;
     position:relative;
     box-shadow:0 4px 12px rgba(0,0,0,.2);
@@ -66,7 +66,6 @@ h1{
     position:relative;
     box-shadow:0 2px 8px rgba(0,0,0,.15);
     
-    /* brilho genérico */
     filter:brightness(1.2) saturate(1.1);
     transition:
         transform .2s,
@@ -108,36 +107,67 @@ h1{
 <div class="gallery" id="gallery">
    <!-- Cada .album tem data-src (arquivo mp3) e data-title (nome da faixa) -->
    <div class="album"
-        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Michael_Jackson_-_Free_Music_Academy/Michael_Jackson_-_Free_Music_Academy_-_01_-_Billie_Jean.mp3"
-        data-title="Billie Jean – Michael Jackson"
-        style="background-image:url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=300&q=80')"></div>
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_01_-_Summer_Breeze.mp3"
+        data-title="Summer Breeze – Scott Buckley"
+        style="background-image:url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=300&q=80')"></div>
 
    <div class="album"
-        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Michael_Jackson_-_Free_Music_Academy/Michael_Jackson_-_Free_Music_Academy_-_02_-_Thriller.mp3"
-        data-title="Thriller – Michael Jackson"
-        style="background-image:url('https://images.unsplash.com/photo-1504198458649-3128b932f49b?auto=format&fit=crop&w=300&q=80')"></div>
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_02_-_Night_Drive.mp3"
+        data-title="Night Drive – Scott Buckley"
+        style="background-image:url('https://images.unsplash.com/photo-1526418528105-7b4c9e9f5b73?auto=format&fit=crop&w=300&q=80')"></div>
 
    <div class="album"
-        data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-        data-title="Love Story – Pop Cover"
-        style="background-image:url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=300&q=80')"></div>
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_03_-_Retro_Rhythm.mp3"
+        data-title="Retro Rhythm – Scott Buckley"
+        style="background-image:url('https://images.unsplash.com/photo-1609429620435-7c59d79d9a6a?auto=format&fit=crop&w=300&q=80')"></div>
 
    <div class="album"
-        data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-        data-title="Shape of You – Pop Remix"
-        style="background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=300&q=80')"></div>
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_04_-_City_Lights.mp3"
+        data-title="City Lights – Scott Buckley"
+        style="background-image:url('https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=300&q=80')"></div>
 
    <div class="album"
-        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Happy_Rock/Kevin_MacLeod_-_Happy_Rock_-_01_-_Sunny_Day.mp3"
-        data-title="Sunny Day – Kevin MacLeod"
-        style="background-image:url('https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=300&q=80')"></div>
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Jahzzar/Jahzzar_-_Happy_Rock/Jahzzar_-_Happy_Rock_-_01_-_Feel_Good.mp3"
+        data-title="Feel Good – Jahzzar"
+        style="background-image:url('https://images.unsplash.com/photo-1581338832364-6b6f9455c9a5?auto=format&fit=crop&w=300&q=80')"></div>
 
    <div class="album"
-        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Lloyd_Burden/Lloyd_Burden_-_The_Electric_Forest_-_04_-_You%20Are%20My%20Sunshine.mp3"
-        data-title="You Are My Sunshine – Lloyd Burden"
-        style="background-image:url('https://images.unsplash.com/photo-1508261303769-d51e6f6bfc68?auto=format&fit=crop&w=300&q=80')"></div>
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Happy_Rock/Kevin_MacLeod_-_Happy_Rock_-_02_-_Sunshine_Fun.mp3"
+        data-title="Sunshine Fun – Kevin MacLeod"
+        style="background-image:url('https://images.unsplash.com/photo-1582719478254-75aabff6eabf?auto=format&fit=crop&w=300&q=80')"></div>
 
    <div class="album"
-        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Jahzzar/Jahzzar_-_Happy_Rock/Jahzzar_-_Happy_Rock_-_03_-_Morning_Sunrise.mp3"
-        data-title="Morning Sunrise – Jahzzar"
-        style="background-image:url('https://images.unsplash.com/photo-1495567720989-cebdbdd97913?auto=format
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Alex_Kennedy/Alex_Kennedy_Folk/Alex_Kennedy_Folk_-_05_-_Dreamy_Summer.mp3"
+        data-title="Dreamy Summer – Alex Kennedy"
+        style="background-image:url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=300&q=80')"></div>
+
+   <div class="album"
+        data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Lloyd_Burden/Lloyd_Burden_-_The_Electric_Forest_-_01_-_Morning_Glitter.mp3"
+        data-title="Morning Glitter – Lloyd Burden"
+        style="background-image:url('https://images.unsplash.com/photo-1556912999-79fa6c9f5c49?auto=format&fit=crop&w=300&q=80')"></div>
+</div>
+
+<audio id="player" preload="none"></audio>
+
+<script>
+const btn      = document.getElementById('playBtn');
+const player   = document.getElementById('player');
+const albums   = document.querySelectorAll('.album');
+const infoBox = document.getElementById('trackInfo');
+
+let current = null;
+
+/* -------------------------------------------------
+   Carrega e reproduz a faixa selecionada
+------------------------------------------------- */
+function loadTrack(el){
+    if (!el) return;
+
+    // limpa seleção anterior
+    if (current) current.classList.remove('active');
+
+    // define a nova faixa
+    player.src = el.dataset.src;
+    player.play();
+
+    // marca
