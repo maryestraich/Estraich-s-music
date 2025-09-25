@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,92 +5,107 @@
 <title>Estraich's Music 🎧</title>
 <style>
 /* ==================== Layout geral ==================== */
-body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    background:#fff;
-    color:#222;
-    font-family:Arial,Helvetica,sans-serif;
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    color: #222;
+    font-family: Arial, Helvetica, sans-serif;
 }
-h1{
-    margin:1.5rem 0 .5rem;
-    font-size:2rem;
-    color:#e91e63;
+h1 {
+    margin: 1.5rem 0 .5rem;
+    font-size: 2rem;
+    color: #e91e63;
 }
 
 /* ==================== Botão Play/Pause ==================== */
-#playBtn{
-    width:80px; height:80px;
-    border:none; border-radius:50%;
-    background:#e91e63;
-    cursor:pointer;
-    position:relative;
-    box-shadow:0 4px 12px rgba(0,0,0,.2);
-    transition:.3s ease;
+#playBtn {
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 50%;
+    background: #e91e63;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+    transition: .3s ease;
 }
-#playBtn:hover{
-    background:#d81b60;
-    transform:scale(1.07);
+#playBtn:hover {
+    background: #d81b60;
+    transform: scale(1.07);
 }
-#playBtn::before{
-    content:'▶';
-    font-size:2rem; color:#fff;
-    position:absolute; left:50%; top:50%;
-    transform:translate(-50%,-50%);
+#playBtn::before {
+    content: '▶';
+    font-size: 2rem;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
-#playBtn.playing{
-    animation:spin 2s linear infinite;
+#playBtn.playing {
+    animation: spin 2s linear infinite;
 }
-#playBtn.playing::before{content:'❚❚';}
+#playBtn.playing::before {
+    content: '❚❚';
+}
 
 /* rotação do botão */
-@keyframes spin{
-    from{transform:rotate(0deg);}
-    to{transform:rotate(360deg);}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* ==================== Galeria de álbuns ==================== */
-.gallery{
-    display:flex; flex-wrap:wrap; gap:1rem;
-    justify-content:center;
-    margin-top:2rem;
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
 }
-.album{
-    width:130px; height:130px;
-    background-size:cover; background-position:center;
-    border-radius:12px;
-    cursor:pointer;
-    position:relative;
-    box-shadow:0 2px 8px rgba(0,0,0,.15);
-    filter:brightness(1.2) saturate(1.1);
+.album {
+    width: 130px;
+    height: 130px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+    filter: brightness(1.2) saturate(1.1);
     transition:
         transform .2s,
         box-shadow .3s,
         filter .3s;
 }
-.album:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 20px rgba(233,30,99,.6);
+.album:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(233, 30, 99, .6);
 }
-.album.active{
+.album.active {
     box-shadow:
-        0 0 30px rgba(233,30,99,.9),
-        inset 0 0 15px rgba(255,255,255,.4);
+        0 0 30px rgba(233, 30, 99, .9),
+        inset 0 0 15px rgba(255, 255, 255, .4);
 }
 
 /* ==================== Texto da faixa ==================== */
-#trackInfo{
-    margin-top:.8rem;
-    font-size:.95rem;
+#trackInfo {
+    margin-top: .8rem;
+    font-size: .95rem;
 }
 
 /* ==================== Responsividade ==================== */
 @media(max-width:500px){
-   .album{width:100px;height:100px;}
-   #playBtn{width:60px;height:60px;}
+   .album { width: 100px; height: 100px; }
+   #playBtn { width: 60px; height: 60px; }
 }
 </style>
 </head>
@@ -105,43 +119,42 @@ h1{
 <div id="trackInfo">Clique em um álbum para tocar</div>
 
 <div class="gallery" id="gallery">
-   <!-- Cada .album tem data-src (arquivo mp3) e data-title (nome da faixa) -->
-   <div class="album"
+    <div class="album"
         data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_01_-_Summer_Breeze.mp3"
         data-title="Summer Breeze – Scott Buckley"
         style="background-image:url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=300&q=80')"></div>
 
-   <div class="album"
+    <div class="album"
         data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_02_-_Night_Drive.mp3"
         data-title="Night Drive – Scott Buckley"
         style="background-image:url('https://images.unsplash.com/photo-1526418528105-7b4c9e9f5b73?auto=format&fit=crop&w=300&q=80')"></div>
 
-   <div class="album"
+    <div class="album"
         data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_03_-_Retro_Rhythm.mp3"
         data-title="Retro Rhythm – Scott Buckley"
         style="background-image:url('https://images.unsplash.com/photo-1609429620435-7c59d79d9a6a?auto=format&fit=crop&w=300&q=80')"></div>
 
-   <div class="album"
+    <div class="album"
         data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_04_-_City_Lights.mp3"
         data-title="City Lights – Scott Buckley"
         style="background-image:url('https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=300&q=80')"></div>
 
-   <div class="album"
+    <div class="album"
         data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Jahzzar/Jahzzar_-_Happy_Rock/Jahzzar_-_Happy_Rock_-_01_-_Feel_Good.mp3"
         data-title="Feel Good – Jahzzar"
         style="background-image:url('https://images.unsplash.com/photo-1581338832364-6b6f9455c9a5?auto=format&fit=crop&w=300&q=80')"></div>
 
-   <div class="album"
+    <div class="album"
         data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Happy_Rock/Kevin_MacLeod_-_Happy_Rock_-_02_-_Sunshine_Fun.mp3"
         data-title="Sunshine Fun – Kevin MacLeod"
         style="background-image:url('https://images.unsplash.com/photo-1582719478254-75aabff6eabf?auto=format&fit=crop&w=300&q=80')"></div>
 
-   <div class="album"
+    <div class="album"
         data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Alex_Kennedy/Alex_Kennedy_Folk/Alex_Kennedy_Folk_-_05_-_Dreamy_Summer.mp3"
         data-title="Dreamy Summer – Alex Kennedy"
         style="background-image:url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=300&q=80')"></div>
 
-   <div class="album"
+    <div class="album"
         data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Lloyd_Burden/Lloyd_Burden_-_The_Electric_Forest_-_01_-_Morning_Glitter.mp3"
         data-title="Morning Glitter – Lloyd Burden"
         style="background-image:url('https://images.unsplash.com/photo-1556912999-79fa6c9f5c49?auto=format&fit=crop&w=300&q=80')"></div>
@@ -157,40 +170,26 @@ const infoBox = document.getElementById('trackInfo');
 
 let current = null;
 
-/* -------------------------------------------------
-   Carrega e reproduz a faixa selecionada
-------------------------------------------------- */
 function loadTrack(el) {
     if (!el) return;
 
-    // Limpa a seleção anterior
     if (current) current.classList.remove('active');
 
-    // Atualiza a nova faixa
     player.src = el.dataset.src;
     player.play();
 
-    // Atualiza o botão para "Pause"
     btn.classList.add('playing');
     infoBox.textContent = `Tocando: ${el.dataset.title}`;
 
-    // Marca o álbum como ativo
     el.classList.add('active');
     current = el;
 }
 
-/* -------------------------------------------------
-   Play/Pause
-------------------------------------------------- */
 btn.addEventListener('click', () => {
-    if (player.paused) {
-        if (current) {
-            player.play();
-            btn.classList.add('playing');
-            infoBox.textContent = `Tocando: ${current.dataset.title}`;
-        }
+    if (player.paused && current) {
+        player.play();
+        btn.classList.add('playing');
+        infoBox.textContent = `Tocando: ${current.dataset.title}`;
     } else {
         player.pause();
-        btn.classList.remove('playing');
-        info
-```
+        btn.classList
