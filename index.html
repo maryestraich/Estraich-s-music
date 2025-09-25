@@ -1,262 +1,246 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Estraich's Music 🎧</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: sans-serif;
-            background-color: #fff;
-        }
-
-        .player {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            flex-direction: column;
-            max-width: 400px;
-            width: 100%;
-            height: 500px;
-            margin: 0 10px;
-            box-shadow: 0 1px 10px gray;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .logo {
-            background-color: #f7f7f7;
-            width: 100%;
-            height: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 5px;
-        }
-
-        .logo i {
-            font-size: 200px;
-        }
-
-        #musicName {
-            white-space: nowrap;
-            width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: 30px;
-            margin-top: 10px;
-        }
-
-        .controls button {
-            border: none;
-            background-color: white;
-            cursor: pointer;
-        }
-
-        .controls i {
-            font-size: 60px;
-            padding: 5px;
-            border-radius: 50%;
-            background-color: #f7f7f7;
-            transition: all .2s;
-        }
-
-        .controls i:hover {
-            background-color: lightgray;
-        }
-
-        .time {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .time span {
-            font-size: 22px;
-            color: #333;
-        }
-
-        .footer {
-            width: 100%;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background-color: #ddd;
-            cursor: pointer;
-            margin-bottom: 5px;
-            border-radius: 5px;
-        }
-
-        .progress {
-            height: 8px;
-            background-color: #333;
-            border-radius: 5px;
-        }
-
-        /* ==================== Galeria de álbuns ==================== */
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-
-        .album {
-            width: 130px;
-            height: 130px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 12px;
-            cursor: pointer;
-            position: relative;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
-            filter: brightness(1.2) saturate(1.1);
-            transition:
-                transform .2s,
-                box-shadow .3s,
-                filter .3s;
-        }
-
-        .album:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(233, 30, 99, .6);
-        }
-
-        .album.active {
-            box-shadow:
-                0 0 30px rgba(233, 30, 99, .9),
-                inset 0 0 15px rgba(255, 255, 255, .4);
-        }
-
-        /* ==================== Responsividade ==================== */
-        @media(max-width: 500px) {
-            .album {
-                width: 100px;
-                height: 100px;
-            }
-        }
-
-    </style>
+  <meta charset="UTF-8" />
+  <title>Estraich’s Music 🎧</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #000;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      color: #fff;
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #e91e63;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      width: 100%;
+      max-width: 900px;
+    }
+    .album {
+      width: 160px;
+      background: #111;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .3s;
+    }
+    .album:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(255,255,255,0.2);
+    }
+    .album.active {
+      border: 2px solid #e91e63;
+    }
+    .album .cover {
+      width: 100%;
+      height: 160px;
+      background-size: cover;
+      background-position: center;
+    }
+    .album .info {
+      padding: 10px;
+      text-align: center;
+    }
+    .album .info .title {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .album .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .album .controls button {
+      border: none;
+      background: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #e91e63;
+    }
+    .album .controls button:disabled {
+      color: #555;
+      cursor: default;
+    }
+    .album .time {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px 10px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #333;
+      cursor: pointer;
+    }
+    .progress {
+      height: 100%;
+      background: #e91e63;
+      width: 0%;
+    }
+    @media(max-width: 500px) {
+      .album {
+        width: 140px;
+      }
+      .album .cover {
+        height: 140px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-    <div class="player">
-        <div class="logo">
-            <i class="fas fa-headphones"></i>
-        </div>
+  <h1>Estraich’s Music 🎧</h1>
 
-        <div id="musicName">Clique em um álbum para tocar</div>
-
+  <div class="gallery" id="gallery">
+    <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_01_-_Summer_Breeze.mp3"
+         data-title="Summer Breeze – Scott Buckley"
+         style="--cover:url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=300&q=80')">
+      <div class="cover" style="background-image: var(--cover);"></div>
+      <div class="info">
+        <div class="title">Summer Breeze</div>
         <div class="controls">
-            <button id="playBtn" aria-label="Play/Pause">
-                <i class="fas fa-play"></i>
-            </button>
+          <button class="play">▶</button>
+          <button class="pause" disabled>❚❚</button>
         </div>
-
-        <div class="time">
-            <span id="currentTime">0:00</span>
-            <span id="duration">0:00</span>
-        </div>
-
-        <div class="progress-bar">
-            <div class="progress" id="progress"></div>
-        </div>
+        <div class="progress-bar"><div class="progress"></div></div>
+        <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
+      </div>
     </div>
 
-    <div class="gallery" id="gallery">
-        <div class="album"
-            data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_01_-_Summer_Breeze.mp3"
-            data-title="Summer Breeze – Scott Buckley"
-            style="background-image:url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=300&q=80')">
+    <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_02_-_Night_Drive.mp3"
+         data-title="Night Drive – Scott Buckley"
+         style="--cover:url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=300&q=80')">
+      <div class="cover" style="background-image: var(--cover);"></div>
+      <div class="info">
+        <div class="title">Night Drive</div>
+        <div class="controls">
+          <button class="play">▶</button>
+          <button class="pause" disabled>❚❚</button>
         </div>
-        <div class="album"
-            data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_02_-_Night_Drive.mp3"
-            data-title="Night Drive – Scott Buckley"
-            style="background-image:url('https://images.unsplash.com/photo-1526418528105-7b4c9e9f5b73?auto=format&fit=crop&w=300&q=80')">
-        </div>
-        <div class="album"
-            data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_03_-_Retro_Rhythm.mp3"
-            data-title="Retro Rhythm – Scott Buckley"
-            style="background-image:url('https://images.unsplash.com/photo-1609429620435-7c59d79d9a6a?auto=format&fit=crop&w=300&q=80')">
-        </div>
-        <div class="album"
-            data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Buckley/Pop_Instrumental/Scott_Buckley_-_Pop_Instrumental_-_04_-_City_Lights.mp3"
-            data-title="City Lights – Scott Buckley"
-            style="background-image:url('https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=300&q=80')">
-        </div>
+        <div class="progress-bar"><div class="progress"></div></div>
+        <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
+      </div>
     </div>
 
-    <audio id="player" preload="none"></audio>
+    <div class="album" data-src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Jahzzar/Jahzzar_-_Happy_Rock/Jahzzar_-_Happy_Rock_-_01_-_Feel_Good.mp3"
+         data-title="Feel Good – Jahzzar"
+         style="--cover:url('https://images.unsplash.com/photo-1608889174113-8c07a83f870c?auto=format&fit=crop&w=300&q=80')">
+      <div class="cover" style="background-image: var(--cover);"></div>
+      <div class="info">
+        <div class="title">Feel Good</div>
+        <div class="controls">
+          <button class="play">▶</button>
+          <button class="pause" disabled>❚❚</button>
+        </div>
+        <div class="progress-bar"><div class="progress"></div></div>
+        <div class="time"><span class="current">0:00</span><span class="duration">0:00</span></div>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        const btn = document.getElementById('playBtn');
-        const player = document.getElementById('player');
-        const albums = document.querySelectorAll('.album');
-        const infoBox = document.getElementById('musicName');
-        const progressBar = document.getElementById('progress');
-        const currentTime = document.getElementById('currentTime');
-        const duration = document.getElementById('duration');
+  <audio id="player" preload="none"></audio>
 
-        let currentAlbum = null;
+  <script>
+    const gallery = document.getElementById('gallery');
+    const player = document.getElementById('player');
+    let currentAlbumEl = null;
 
-        // Carrega e reproduz a faixa selecionada
-        function loadTrack(el) {
-            if (!el) return;
+    gallery.addEventListener('click', (e) => {
+      let albumEl = e.target.closest('.album');
+      if (!albumEl) return;
+      if (albumEl === currentAlbumEl) return;
 
-            // Limpa a seleção anterior
-            if (currentAlbum) currentAlbum.classList.remove('active');
+      if (currentAlbumEl) resetAlbum(currentAlbumEl);
 
-            // Atualiza a nova faixa
-            player.src = el.dataset.src;
-            player.play();
+      currentAlbumEl = albumEl;
+      albumEl.classList.add('active');
 
-            // Atualiza o botão para "Pause"
-            btn.querySelector('i').classList.remove('fa-play');
-            btn.querySelector('i').classList.add('fa-pause');
-            infoBox.textContent = `Tocando: ${el.dataset.title}`;
+      const src = albumEl.dataset.src;
+      player.src = src;
+      player.play();
 
-            // Marca o álbum como ativo
-            el.classList.add('active');
-            currentAlbum = el;
+      const btnPlay = albumEl.querySelector('.play');
+      const btnPause = albumEl.querySelector('.pause');
+      btnPlay.disabled = true;
+      btnPause.disabled = false;
+
+      const currentSpan = albumEl.querySelector('.current');
+      const durationSpan = albumEl.querySelector('.duration');
+      const progressEl = albumEl.querySelector('.progress');
+
+      player.addEventListener('loadedmetadata', () => {
+        durationSpan.textContent = formatTime(player.duration);
+      });
+
+      player.addEventListener('timeupdate', () => {
+        const c = player.currentTime;
+        const d = player.duration;
+        if (!isNaN(d) && d > 0) {
+          progressEl.style.width = (c / d) * 100 + '%';
         }
+        currentSpan.textContent = formatTime(c);
+      });
 
-        // Play/Pause
-        btn.addEventListener('click', () => {
-            if (player.paused && currentAlbum) {
-                player.play();
-                btn.querySelector('i').classList.remove('fa-play');
-                btn.querySelector('i').classList.add('fa-pause');
-            } else {
-                player.pause();
-                btn.querySelector('i').classList.remove('fa-pause');
-                btn.querySelector('i').classList.add('fa-play');
-            }
-        });
+      btnPause.onclick = () => {
+        player.pause();
+        btnPause.disabled = true;
+        btnPlay.disabled = false;
+      };
+      btnPlay.onclick = () => {
+        player.play();
+        btnPlay.disabled = true;
+        btnPause.disabled = false;
+      };
 
-        // Atualiza a barra de progresso
-        player.addEventListener('timeupdate', () => {
-            const current = player.currentTime;
-            const total = player.duration;
-            progressBar.style.width = (current / total) * 100 + '%';
-            currentTime.textContent = formatTime(current);
-            duration.textContent = formatTime(total);
-        });
+      player.onended = () => {
+        resetAlbum(albumEl);
+      };
+    });
 
-        // Formatar o tempo para minutos:segundos
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs < 10 ? '0'
-```
+    function resetAlbum(albumEl) {
+      albumEl.classList.remove('active');
+      const btnPlay = albumEl.querySelector('.play');
+      const btnPause = albumEl.querySelector('.pause');
+      const progressEl = albumEl.querySelector('.progress');
+      const currentSpan = albumEl.querySelector('.current');
+      const durationSpan = albumEl.querySelector('.duration');
+
+      btnPlay.disabled = false;
+      btnPause.disabled = true;
+      progressEl.style.width = '0%';
+      currentSpan.textContent = '0:00';
+      durationSpan.textContent = '0:00';
+
+      if (albumEl === currentAlbumEl) {
+        player.pause();
+        player.currentTime = 0;
+        currentAlbumEl = null;
+      }
+    }
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60) || 0;
+      const s = Math.floor(sec % 60) || 0;
+      return `$
