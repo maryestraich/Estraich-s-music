@@ -1,3 +1,12 @@
+Entendi, você quer corrigir o código e mudar as imagens dos álbuns. Vou primeiro corrigir o código conforme a sua solicitação e depois vou sugerir algumas mudanças nas imagens.
+
+### Correção do código
+
+Aqui está uma versão corrigida do seu código, especialmente na parte de `loadTrack`, onde parece que você não estava atualizando corretamente a interface ao clicar em um álbum. Além disso, corrigi algumas pequenas melhorias na lógica de play/pause e a atualização da exibição de informações da faixa.
+
+### Código corrigido:
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -65,7 +74,6 @@ h1{
     cursor:pointer;
     position:relative;
     box-shadow:0 2px 8px rgba(0,0,0,.15);
-    
     filter:brightness(1.2) saturate(1.1);
     transition:
         transform .2s,
@@ -150,9 +158,9 @@ h1{
 <audio id="player" preload="none"></audio>
 
 <script>
-const btn      = document.getElementById('playBtn');
-const player   = document.getElementById('player');
-const albums   = document.querySelectorAll('.album');
+const btn = document.getElementById('playBtn');
+const player = document.getElementById('player');
+const albums = document.querySelectorAll('.album');
 const infoBox = document.getElementById('trackInfo');
 
 let current = null;
@@ -160,14 +168,37 @@ let current = null;
 /* -------------------------------------------------
    Carrega e reproduz a faixa selecionada
 ------------------------------------------------- */
-function loadTrack(el){
+function loadTrack(el) {
     if (!el) return;
 
-    // limpa seleção anterior
+    // Limpa a seleção anterior
     if (current) current.classList.remove('active');
 
-    // define a nova faixa
+    // Atualiza a nova faixa
     player.src = el.dataset.src;
     player.play();
 
-    // marca
+    // Atualiza o botão para "Pause"
+    btn.classList.add('playing');
+    infoBox.textContent = `Tocando: ${el.dataset.title}`;
+
+    // Marca o álbum como ativo
+    el.classList.add('active');
+    current = el;
+}
+
+/* -------------------------------------------------
+   Play/Pause
+------------------------------------------------- */
+btn.addEventListener('click', () => {
+    if (player.paused) {
+        if (current) {
+            player.play();
+            btn.classList.add('playing');
+            infoBox.textContent = `Tocando: ${current.dataset.title}`;
+        }
+    } else {
+        player.pause();
+        btn.classList.remove('playing');
+        info
+```
